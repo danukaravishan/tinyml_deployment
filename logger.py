@@ -8,7 +8,7 @@ import time
 
 # Setup logger with 24-hour timestamp
 logging.basicConfig(
-    filename='opt/log/earthquake.log',
+    filename='/opt/log/earthquake.log',
     level=logging.INFO,
     format='%(asctime)s %(message)s',
     datefmt='%Y-%m-%d %H:%M:%S'  # %H = 24-hour clock
