@@ -38,6 +38,8 @@ pip install tflite-runtime==2.13.0
 pip install --no-binary :all: numpy==1.23.5
 pip install psutil
 
+echo "Step 6: Creating logs directory..."
+mkdir -p logs
 
 echo "Step 7: Making run.sh executable..."
 # 10. Make the run script executable
