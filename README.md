@@ -35,11 +35,10 @@ mode_deployement/
 
 ## Installation
 
-Use the provided installer script to set up pyenv, Python, dependencies, and clone the application:
-
+First, clone the repository and enter its folder:
 ```bash
 git clone https://github.com/danukaravishan/tinyml_deployment.git
-cd mode_deployement
+cd tinyml_deployment
 chmod +x installer.sh
 ./installer.sh
 ```
@@ -48,7 +47,7 @@ The installer will:
 - Install pyenv and Python 3.9.23  
 - Create a project folder `ML_DETECTION`  
 - Install required Python packages  
-- Clone the main repo into `ML_DETECTION/tinyml_deployment`  
+- Clone the main application into `ML_DETECTION/tinyml_deployment`  
 
 ## Usage
 

@@ -27,31 +27,20 @@ echo "Step 4: Installing Python 3.9.23 via pyenv..."
 # 4. Install Python 3.9.23 via pyenv
 pyenv install -s 3.9.23
 
-echo "Step 5: Creating project directory ML_DETECTION..."
-# 5. Create project directory and enter
-mkdir -p ML_DETECTION
-cd ML_DETECTION
 
-echo "Step 6: Setting local Python version to 3.9.23..."
+echo "Step 5: Setting local Python version to 3.9.23..."
 # 6. Set local Python version
 pyenv local 3.9.23
 
-echo "Step 7: Installing dependencies..."
+echo "Step 6: Installing dependencies..."
 # 7. Install dependencies
 pip install tflite-runtime==2.13.0
 pip install --no-binary :all: numpy==1.23.5
 pip install psutil
 
-echo "Step 8: Cloning repository tinyml_deployment..."
-# 8. Clone your GitHub repo
-git clone https://github.com/danukaravishan/tinyml_deployment.git
 
-echo "Step 9: Entering the tinyml_deployment folder..."
-# 9. Enter the repo folder
-cd tinyml_deployment
-
-echo "Step 10: Making run.sh executable..."
+echo "Step 7: Making run.sh executable..."
 # 10. Make the run script executable
 chmod +x run.sh
 
-echo "Step 11: Setup complete. Run './run.sh' to start the application in the background."
+echo "Step 8: Setup complete. Run './run.sh' to start the application in the background."
