@@ -45,4 +45,8 @@ echo "Step 7: Making run.sh executable..."
 # 10. Make the run script executable
 chmod +x run.sh
 
-echo "Step 8: Setup complete. Run './run.sh' to start the application in the background."
+echo "Step 8: Setting timezone to Pacific/Auckland..."
+sudo timedatectl set-ntp true
+sudo timedatectl set-timezone Pacific/Auckland
+
+echo "Step 9: Setup complete. Run './run.sh' to start the application in the background."

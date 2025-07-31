@@ -7,6 +7,7 @@ import threading
 import numpy as np
 from enum import Enum
 from logger import start_periodic_logging, log_detection, log_vibration
+from datetime import datetime
 
 SAMPLE_RATE = 100
 WINDOW_DURATION = 2
@@ -73,7 +74,7 @@ def parse_data_packet(packet_str):
         values = parsed[2:]  # Skip timestamp
         return channel, values
     except Exception as e:
-        print(f"Failed to parse packet: {e}")
+        print(f" {datetime.now()} Failed to parse packet: {e}")
         return None, None
 
 
@@ -82,10 +83,10 @@ def data_reader():
     try:
         sock.bind(('', PORT))
     except socket.error as e:
-        print(f"Socket error: {e}")
+        print(f" {datetime.now()} Socket error: {e}")
         return
 
-    print(f"Listening for data on UDP port {PORT}...")
+    print(f" {datetime.now()} Listening for data on UDP port {PORT}...")
 
     while True:
         try:
@@ -106,7 +107,7 @@ def data_reader():
                 min_len -= 1
 
         except Exception as e:
-            print(f"Error in receiving/parsing data: {e}")
+            print(f" {datetime.now()} Error in receiving/parsing data: {e}")
             continue
 
 
@@ -132,7 +133,7 @@ def data_processor():
         if state == STATE.IDLE:
             detection_count = 0
             buffer = []
-            print("IDLE STATE: Waiting for data...")
+            print(f" {datetime.now()} IDLE STATE: Waiting for data...")
             state = STATE.READ
 
         elif state == STATE.READ:
@@ -151,11 +152,11 @@ def data_processor():
                     
             except queue.Empty:
                 state = STATE.READ
-                print("No data available, waiting...")
-                
+                print(f" {datetime.now()} No data available, waiting...")
+
         elif state == STATE.INFERENCE:
             if segment is None or segment.shape[1] != 3 or segment.shape[0] != WINDOW_SIZE:
-                print("Invalid segment, resetting")
+                print(f" {datetime.now()} Invalid segment, resetting")
                 state = STATE.READ
                 continue
 
@@ -170,12 +171,12 @@ def data_processor():
             if out[0] > 0.57:
                 detection_count += 1
                 log_vibration()
-                print(f"Detection {detection_count}")
+                print(f" {datetime.now()} Detection {detection_count}")
             else:
                 detection_count = 0
-                
-            if detection_count >= 4: 
-                print("ALARM triggered!")
+
+            if detection_count >= 4:
+                print(f" {datetime.now()} ALARM triggered!")
                 state = STATE.ALARM
                 detection_count = 0
                 continue
@@ -184,7 +185,7 @@ def data_processor():
                 state = STATE.READ
 
         elif state == STATE.ALARM:
-            print("======== ALARM STAGE =========")
+            print(f" {datetime.now()} ======== ALARM STAGE =========")
             log_detection()
             state = STATE.IDLE
 
