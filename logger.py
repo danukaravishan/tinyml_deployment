@@ -30,8 +30,7 @@ def log_system_status(interval=900):
     """Every `interval` seconds: log CPU, MEM, TEMP and count of detections in last interval."""
     cpu = psutil.cpu_percent()
     mem = psutil.virtual_memory().percent
-    #cpu_temp = get_cpu_temp()
-    cpu_temp = 50
+    cpu_temp = get_cpu_temp()
     temp_str = f"{cpu_temp:.1f}°C" if cpu_temp is not None else "N/A"
 
     now = datetime.now()
@@ -57,9 +56,3 @@ def start_periodic_logging(interval=900):
     while True:
         log_system_status(interval)
         time.sleep(interval)
-
-
-if __name__ == "__main__":
-    # … start data_reader and data_processor threads …
-    threading.Thread(target=start_periodic_logging, args=(900,), daemon=True).start()
-    # … rest of main loop

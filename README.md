@@ -35,24 +35,31 @@ mode_deployement/
 
 ## Installation
 
+Use the provided installer script to set up pyenv, Python, dependencies, and clone the application:
+
 ```bash
-git clone git@github.com:danukaravishan/tinyml_deployment.git
-cd tinyml_deployment
-python3 -m venv venv
-source venv/bin/activate
-pip install numpy tensorflow psutil
+git clone https://github.com/danukaravishan/tinyml_deployment.git
+cd mode_deployement
+chmod +x installer.sh
+./installer.sh
 ```
+
+The installer will:
+- Install pyenv and Python 3.9.23  
+- Create a project folder `ML_DETECTION`  
+- Install required Python packages  
+- Clone the main repo into `ML_DETECTION/tinyml_deployment`  
 
 ## Usage
 
-1. **Start the main application**  
-   Listens on UDP port 8888 for seismic data packets, performs inference and logs results:
+1. **Launch the application**  
    ```bash
-   python main.py
+   cd ML_DETECTION/tinyml_deployment
+   ./run.sh
    ```
 
 2. **Simulate incoming data**  
-   In a separate shell, replay sample data at ~20 Hz:
+   In a separate shell, replay sample data at ~20 Hz:  
    ```bash
    python simulate_data.py
    ```

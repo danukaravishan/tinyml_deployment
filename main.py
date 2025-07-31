@@ -195,7 +195,7 @@ if __name__ == "__main__":
     t1.start()
     t2.start()
 
-    threading.Thread(target=start_periodic_logging, args=(5,), daemon=True).start()
+    threading.Thread(target=start_periodic_logging, args=(600,), daemon=True).start()
 
     try:
         while True:
