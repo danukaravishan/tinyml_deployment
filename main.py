@@ -171,6 +171,8 @@ def data_processor():
                 detection_count += 1
                 log_vibration()
                 print(f"Detection {detection_count}")
+            else:
+                detection_count = 0
                 
             if detection_count >= 4: 
                 print("ALARM triggered!")
