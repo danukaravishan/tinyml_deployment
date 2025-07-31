@@ -5,7 +5,6 @@ import socket
 import ast
 import threading
 import numpy as np
-import tensorflow as tf
 from enum import Enum
 from logger import start_periodic_logging, log_detection
 
@@ -117,6 +116,7 @@ def data_processor():
     try:
         from tflite_runtime.interpreter import Interpreter
     except ImportError:
+        import tensorflow as tf
         Interpreter = tf.lite.Interpreter # Run in different environment without tflite_runtime
 
     interpreter = Interpreter(model_path="models/model.tflite")
