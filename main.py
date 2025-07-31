@@ -181,9 +181,7 @@ def data_processor():
                 continue
                 
             else:
-                print("No alarm, returning to READ")
                 state = STATE.READ
-
 
         elif state == STATE.ALARM:
             print("======== ALARM STAGE =========")
