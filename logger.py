@@ -1,5 +1,6 @@
 import logging
 import psutil
+import os
 from datetime import datetime, timedelta
 from collections import deque
 import threading
@@ -29,7 +30,9 @@ def get_cpu_temp():
 def log_system_status(interval=900):
     """Every `interval` seconds: log CPU, MEM, TEMP and count of detections in last interval."""
     cpu = psutil.cpu_percent()
-    mem = psutil.virtual_memory().percent
+    proc = psutil.Process(os.getpid())
+    mem = proc.memory_percent()
+    #mem = psutil.virtual_memory().percent
     cpu_temp = get_cpu_temp()
     temp_str = f"{cpu_temp:.1f}°C" if cpu_temp is not None else "N/A"
 
@@ -50,6 +53,13 @@ def log_detection():
     now = datetime.now()
     detection_times.append(now)
     logging.info(f"EARTHQUAKE DETECTED at {now:%Y-%m-%d %H:%M:%S}")
+
+def log_vibration():
+    """Log only the vibration detection time and record it."""
+    now = datetime.now()
+    detection_times.append(now)
+    logging.info(f"VIBRATION DETECTED at {now:%Y-%m-%d %H:%M:%S}, NOT EARTHQUAKE")
+
 
 def start_periodic_logging(interval=900):
     """Thread target to call log_system_status every `interval` seconds."""

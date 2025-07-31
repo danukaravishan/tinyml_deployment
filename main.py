@@ -6,7 +6,7 @@ import ast
 import threading
 import numpy as np
 from enum import Enum
-from logger import start_periodic_logging, log_detection
+from logger import start_periodic_logging, log_detection, log_vibration
 
 SAMPLE_RATE = 100
 WINDOW_DURATION = 2
@@ -169,6 +169,7 @@ def data_processor():
 
             if out[0] > 0.57:
                 detection_count += 1
+                log_vibration()
                 print(f"Detection {detection_count}")
                 
             if detection_count >= 4: 
