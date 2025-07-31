@@ -5,14 +5,13 @@ from datetime import datetime, timedelta
 from collections import deque
 import threading
 import time
-# … other imports …
 
-# Setup logger
+# Setup logger with 24-hour timestamp
 logging.basicConfig(
-    filename='logs/earthquake.log',
+    filename='opt/log/earthquake.log',
     level=logging.INFO,
     format='%(asctime)s %(message)s',
-    datefmt='%Y-%m-%d %H:%M:%S'
+    datefmt='%Y-%m-%d %H:%M:%S'  # %H = 24-hour clock
 )
 
 # global deque to store detection timestamps
@@ -57,7 +56,6 @@ def log_detection():
 def log_vibration():
     """Log only the vibration detection time and record it."""
     now = datetime.now()
-    detection_times.append(now)
     logging.info(f"VIBRATION DETECTED at {now:%Y-%m-%d %H:%M:%S}, NOT EARTHQUAKE")
 
 
